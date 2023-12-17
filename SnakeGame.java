@@ -39,6 +39,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         setFocusable(true);
 
         snakeHead = new Tile(8, 10);
+        snakeHead.distanceToFood = Tile.MAX_WEIGHT;
         snakeBody = new ArrayList<Tile>();
 
         food = new Tile(10, 10);
@@ -93,17 +94,28 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 	}
 
     public void placeFood(){
+
         food.x = random.nextInt(boardWidth/tileSize);
 		food.y = random.nextInt(boardHeight/tileSize);
+ 
+        // replace food if it is every placed on the snakes body
+        if (food.x == snakeHead.x && food.y == snakeHead.y){
+            placeFood();
+        }
+        for (int i = 0; i < snakeBody.size(); i++){
+            if (food.x == snakeBody.get(i).x && food.y == snakeBody.get(i).y){
+                placeFood();
+                break;
+            }
+        }
 	}
 
     public void move() {
         //eat food
-        if (collision(snakeHead, food)) {
+        if (collision(snakeHead, food)) {   
             snakeBody.add(new Tile(food.x, food.y));
             placeFood();
         }
-
         //move snake body
         for (int i = snakeBody.size()-1; i >= 0; i--) {
             Tile snakePart = snakeBody.get(i);
@@ -118,7 +130,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             }
         }
         //move snake head
-        pathFinder.MoveToBestTile(food, snakeHead);
+        pathFinder.MoveToBestTile(food, snakeHead, snakeBody);
 
         //game over conditions
         for (int i = 0; i < snakeBody.size(); i++) {

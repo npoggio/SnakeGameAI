@@ -14,11 +14,11 @@ public class PathFinder {
         this.tileSize = tileSize;
     }
 
-    public void MoveToBestTile(Tile food, Tile head){
+    public void MoveToBestTile(Tile food, Tile head, List<Tile> body){
         this.food = food;
 
         // Gets the neighbors of the head
-        Neighbors neighbors = new Neighbors(head);
+        Neighbors neighbors = new Neighbors(head, body);
         Directions bestDirection = neighbors.CalculateHeuristics(food);
 
         System.out.println(bestDirection);

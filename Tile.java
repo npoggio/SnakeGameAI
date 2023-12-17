@@ -1,5 +1,8 @@
 
 public class Tile {
+
+        public static final int MAX_WEIGHT = 1000000;
+
         int x;
         int y;
         int distanceToFood;

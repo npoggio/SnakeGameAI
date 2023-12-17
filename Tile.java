@@ -9,4 +9,8 @@ public class Tile {
             this.y = y;
             distanceToFood = 0;
         }
+
+        public String CoordinatesAsString(){
+           return x + ", " + y;
+        }
 }  

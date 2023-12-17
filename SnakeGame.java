@@ -11,7 +11,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
     int boardWidth;
     int boardHeight;
-    int tileSize = 25;
+    int tileSize = 50;
     
     //snake
     Tile snakeHead;
@@ -38,7 +38,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
-        snakeHead = new Tile(5, 5);
+        snakeHead = new Tile(8, 10);
         snakeBody = new ArrayList<Tile>();
 
         food = new Tile(10, 10);
@@ -118,8 +118,7 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             }
         }
         //move snake head
-        //snakeHead.x += velocityX;
-       // snakeHead.y += velocityY;
+        pathFinder.MoveToBestTile(food, snakeHead);
 
         //game over conditions
         for (int i = 0; i < snakeBody.size(); i++) {

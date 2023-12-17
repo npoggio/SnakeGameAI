@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.*;
 
-public class SnakeGame extends JPanel implements ActionListener, KeyListener {
-    private class Tile {
-        int x;
-        int y;
 
-        Tile(int x, int y) {
-            this.x = x;
-            this.y = y;
-        }
-    }  
+// NOTE: All credit for the base game goes to ImKennyYip on YouTube
+public class SnakeGame extends JPanel implements ActionListener, KeyListener {
+    
 
     int boardWidth;
     int boardHeight;
@@ -33,6 +27,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
     Timer gameLoop;
 
     boolean gameOver = false;
+
+    PathFinder pathFinder = new PathFinder(tileSize);
 
     SnakeGame(int boardWidth, int boardHeight) {
         this.boardWidth = boardWidth;
@@ -72,13 +68,10 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
 
         //Food
         g.setColor(Color.red);
-        // g.fillRect(food.x*tileSize, food.y*tileSize, tileSize, tileSize);
         g.fill3DRect(food.x*tileSize, food.y*tileSize, tileSize, tileSize, true);
 
         //Snake Head
         g.setColor(Color.green);
-        // g.fillRect(snakeHead.x, snakeHead.y, tileSize, tileSize);
-        // g.fillRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize);
         g.fill3DRect(snakeHead.x*tileSize, snakeHead.y*tileSize, tileSize, tileSize, true);
         
         //Snake Body
@@ -125,8 +118,8 @@ public class SnakeGame extends JPanel implements ActionListener, KeyListener {
             }
         }
         //move snake head
-        snakeHead.x += velocityX;
-        snakeHead.y += velocityY;
+        //snakeHead.x += velocityX;
+       // snakeHead.y += velocityY;
 
         //game over conditions
         for (int i = 0; i < snakeBody.size(); i++) {

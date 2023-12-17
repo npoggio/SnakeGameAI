@@ -1,5 +1,6 @@
 import javax.swing.*;
 
+// NOTE: All credit for the base game goes to ImKennyYip on YouTube
 public class App {
     public static void main(String[] args) throws Exception {
         int boardWidth = 600;
@@ -7,7 +8,7 @@ public class App {
 
         JFrame frame = new JFrame("Snake");
         frame.setVisible(true);
-	frame.setSize(boardWidth, boardHeight);
+	    frame.setSize(boardWidth, boardHeight);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
